@@ -1,5 +1,6 @@
 # Use the official PostgreSQL image as a parent image
-FROM postgres:15.5  #last version of postgres 15 before major release 16, which is too new to use right now.
+# Last version of postgres 15 before major release 16, which is too new to use
+FROM postgres:15.5  
 
 LABEL AUTHOR sedentary
 
