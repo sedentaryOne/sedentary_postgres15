@@ -13,7 +13,7 @@ pipeline {
                         sh 'docker login -u $USERNAME -p $PASSWORD'
                     }
                    // Build and push the Docker image
-                    sh "docker build -t ${imageName} ."
+                    sh "docker build -t sedentary/sedentary-containers:${imageName} ."
                     sh "docker push sedentary/sedentary-containers:${imageName}"
 
                    // Set environment variable for docker-compose
