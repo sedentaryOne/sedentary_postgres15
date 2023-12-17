@@ -15,7 +15,6 @@ pipeline {
                    // Build and push the Docker image
                     sh "docker build -t ${imageName} ."
                     sh "docker push sedentary/sedentary-containers:${imageName}"
-                     // docker push sedentary/sedentary-containers:tagname
 
                    // Set environment variable for docker-compose
                     sh "echo IMAGE_VERSION=${imageVersion} > .env"
