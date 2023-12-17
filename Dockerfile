@@ -14,15 +14,15 @@ ENV POSTGRES_DB=yp_db
 ENV POSTGRES_USER=yp_db_user
 ENV POSTGRES_PASSWORD=yp_db_password
 
-# Optional: Add initialization scripts if you have any
-COPY ./init-scripts/ /docker-entrypoint-initdb.d/
+# # Optional: Add initialization scripts if you have any
+# COPY ./init-scripts/ /docker-entrypoint-initdb.d/
 
 # Add your script
-COPY upgrade.sh /path/to/upgrade.sh
-RUN chmod +x /path/to/upgrade.sh
+COPY upgrade.sh upgrade.sh
+RUN chmod +x upgrade.sh
 
 # Create a cron job
-RUN echo "0 0 * * * /path/to/upgrade.sh >> /var/log/upgrade.log 2>&1" | crontab -
+RUN echo "0 0 * * * upgrade.sh >> /var/log/upgrade.log 2>&1" | crontab -
 
 # Run the command on container startup
 CMD ["cron", "-f"]
