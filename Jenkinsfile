@@ -1,12 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
-            steps {
-                // Check out the code from GitHub
-                git 'https://github.com/sedentaryOne/sedentary_postgres15.git'
-            }
-        }
 
         stage('Build and Push Docker Image') {
             steps {
