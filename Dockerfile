@@ -13,6 +13,7 @@ ENV LANG en_CA.utf8
 ENV POSTGRES_DB=yp_db
 ENV POSTGRES_USER=yp_db_user
 ENV POSTGRES_PASSWORD=yp_db_password
+ENV POSTGRES_DB gdp
 
 # # Optional: Add initialization scripts if you have any
 # COPY ./init-scripts/ /docker-entrypoint-initdb.d/
@@ -26,11 +27,11 @@ RUN apt-get update && \
 COPY upgrade.sh /usr/local/bin/upgrade.sh
 RUN chmod +x /usr/local/bin/upgrade.sh
 
-# Create a cron job
-# RUN echo "0 0 * * * upgrade.sh >> /var/log/gdp/upgrade.log 2>&1" | crontab -
+# Create a cron job to run every 
+RUN echo "0 0 * * * upgrade.sh >> /var/log/gdp/upgrade.log 2>&1" | crontab -
 
-# Create a cron job
-RUN echo "* * * * * /usr/local/bin/upgrade.sh >> /var/log/gdp/upgrade.log 2>&1" | crontab -
+# Create a cron job runs every minute for testing.
+# RUN echo "* * * * * /usr/local/bin/upgrade.sh >> /var/log/gdp/upgrade.log 2>&1" | crontab -
 
 # Run the command on container startup
 CMD ["cron", "-f"]
