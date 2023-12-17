@@ -18,9 +18,10 @@ ENV POSTGRES_PASSWORD=yp_db_password
 # COPY ./init-scripts/ /docker-entrypoint-initdb.d/
 
 
-# Install cron
-RUN apt-get update && apt-get install -y cron
-
+# Install cron, and Nano
+RUN apt-get update && \
+    apt-get install -y cron nano && \
+    rm -rf /var/lib/apt/lists/*
 # Add your script
 COPY upgrade.sh /usr/local/bin/upgrade.sh
 RUN chmod +x /usr/local/bin/upgrade.sh
