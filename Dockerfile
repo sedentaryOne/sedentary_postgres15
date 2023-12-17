@@ -22,13 +22,14 @@ ENV POSTGRES_PASSWORD=yp_db_password
 RUN apt-get update && apt-get install -y cron
 
 # Add your script
-COPY upgrade.sh upgrade.sh
-RUN chmod +x upgrade.sh
+COPY upgrade.sh /usr/local/bin/upgrade.sh
+RUN chmod +x /usr/local/bin/upgrade.sh
 
 # Create a cron job
 # RUN echo "0 0 * * * upgrade.sh >> /var/log/upgrade.log 2>&1" | crontab -
+
 # Create a cron job
-RUN echo "* * * * * upgrade.sh >> /var/log/upgrade.log 2>&1" | crontab -
+RUN echo "* * * * * /usr/local/bin/upgrade.sh >> /var/log/upgrade.log 2>&1" | crontab -
 
 # Run the command on container startup
 CMD ["cron", "-f"]
