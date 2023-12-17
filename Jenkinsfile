@@ -7,7 +7,7 @@ pipeline {
                 script {
                    def imageVersion = "1.0"  // Define your versioning scheme
                     def buildNumber = env.BUILD_NUMBER
-                    def imageName = "sedentary_postres15:${imageVersion}-${buildNumber}"
+                    def imageName = "sedentary_postres15-${imageVersion}-${buildNumber}"
                     // Login to Docker Hub
                     withCredentials([usernamePassword(credentialsId: 'hub.docker.com', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh 'docker login -u $USERNAME -p $PASSWORD'
