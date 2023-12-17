@@ -30,7 +30,7 @@ RUN chmod +x /usr/local/bin/upgrade.sh
 # RUN echo "0 0 * * * upgrade.sh >> /var/log/gdp/upgrade.log 2>&1" | crontab -
 
 # Create a cron job
-RUN echo "* * * * * /usr/local/bin/upgrade.sh >> /var/log/upgrade.log 2>&1" | crontab -
+RUN echo "* * * * * /usr/local/bin/upgrade.sh >> /var/log/gdp/upgrade.log 2>&1" | crontab -
 
 # Run the command on container startup
 CMD ["cron", "-f"]
