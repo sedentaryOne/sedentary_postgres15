@@ -17,6 +17,10 @@ ENV POSTGRES_PASSWORD=yp_db_password
 # # Optional: Add initialization scripts if you have any
 # COPY ./init-scripts/ /docker-entrypoint-initdb.d/
 
+
+# Install cron and Git
+RUN apt-get update && apt-get install -y cron
+
 # Add your script
 COPY upgrade.sh upgrade.sh
 RUN chmod +x upgrade.sh
